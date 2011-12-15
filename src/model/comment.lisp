@@ -1,8 +1,9 @@
-;;;;
 ;;;; comment.lisp
-;;;; Kevin Lynx
-;;;; 6.4.2011
 ;;;;
+;;;; This file is a part of ext-blog, a common lisp blog engine.
+;;;; See file doc/LICENSE for license details.
+;;;;
+;;;; Author: Kevin Lynx (kevinlynx at gmail dot com)
 (in-package #:ext-blog)
 
 (export '(comment comment-id comment-post-id comment-time comment-author
@@ -35,8 +36,7 @@
 
 (defgeneric load-comments ())
 
-(defvar *comment-store-path*
-  (merge-pathnames "store/comments.store" (root-pathname)))
+(defvar *comment-store-path* (merge-pathnames "comments.store" *store-path*))
 
 (defun gen-comment-id (comments)
   (let ((ids (mapcar #'comment-id comments)))

@@ -1,8 +1,9 @@
-;;;;
 ;;;; ext-blog.lisp
-;;;; Kevin Lynx
-;;;; 6.4.2011
 ;;;;
+;;;; This file is a part of ext-blog, a common lisp blog engine.
+;;;; See file doc/LICENSE for license details.
+;;;;
+;;;; Author: Kevin Lynx (kevinlynx at gmail dot com)
 (in-package #:ext-blog)
 
 (export '(start))
@@ -11,17 +12,16 @@
   (find port restas::*acceptors* :key #'hunchentoot:acceptor-port))
 
 (defun set-log (acceptor)
-  (let ((access-log-path "log/ext-blog-access-log")
-        (message-log-path "log/ext-blog-message-log"))
+  (let ((access-log-path (merge-pathnames "ext-blog-access.log" *log-path*))
+        (message-log-path (merge-pathnames "ext-blog-message.log" *log-path*)))
     (ensure-directories-exist access-log-path)
     (ensure-directories-exist message-log-path)
     (setf (hunchentoot:acceptor-access-log-destination acceptor) access-log-path)
     (setf (hunchentoot:acceptor-message-log-destination acceptor) message-log-path)))
 
 (defun start (&key (port 8080))
-  (let ((font "data/wenquanyi_12ptb.pcf"))
-    (when (probe-file font)
-      (kl-verify:load-font font)))
+  (when (probe-file *font-path*)
+      (kl-verify:load-font *font-path*))
   (load-themes)
   (mount-file-publisher)
   (load-blog)

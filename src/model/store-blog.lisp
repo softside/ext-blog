@@ -1,8 +1,9 @@
-;;;;
 ;;;; store-blog.lisp
-;;;; Kevin Lynx
-;;;; 6.13.2011
 ;;;;
+;;;; This file is a part of ext-blog, a common lisp blog engine.
+;;;; See file doc/LICENSE for license details.
+;;;;
+;;;; Author: Kevin Lynx (kevinlynx at gmail dot com)
 (in-package #:ext-blog)
 
 (defun alist-field (alist key)
@@ -25,8 +26,7 @@
     :footer-html (alist-field alist :footer-html)
     :theme (find-theme (alist-field alist :theme))))
 
-(defvar *blog-store-path*
-  (merge-pathnames "store/blog.store" (root-pathname)))
+(defvar *blog-store-path* (merge-pathnames "blog.store" *store-path*))
 
 (defun load-blog ()
   "Load a blog from storage, it will load posts and comments either."

@@ -1,8 +1,9 @@
-;;;;
 ;;;; post.lisp
-;;;; Kevin Lynx
-;;;; 6.4.2011
 ;;;;
+;;;; This file is a part of ext-blog, a common lisp blog engine.
+;;;; See file doc/LICENSE for license details.
+;;;;
+;;;; Author: Kevin Lynx (kevinlynx at gmail dot com)
 (in-package #:ext-blog)
 
 (export '(post post-id post-time post-revised-time post-title post-content))
@@ -24,8 +25,7 @@
             :accessor post-content))
   (:documentation "A post object is also called an entry."))
 
-(defvar *post-store-path*
-  (merge-pathnames "store/posts.store" (root-pathname)))
+(defvar *post-store-path* (merge-pathnames "posts.store" *store-path*))
 
 (defun gen-post-id (posts)
   (let ((ids (mapcar #'post-id posts)))

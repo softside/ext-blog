@@ -1,8 +1,9 @@
-;;;;
 ;;;; utils.lisp
-;;;; Kevin Lynx
-;;;; 6.4.2011
 ;;;;
+;;;; This file is a part of ext-blog, a common lisp blog engine.
+;;;; See file doc/LICENSE for license details.
+;;;;
+;;;; Author: Kevin Lynx (kevinlynx at gmail dot com)
 (in-package #:ext-blog)
 
 (export '(format-timestring
@@ -16,9 +17,6 @@
 
 (defun src-pathname ()
   (merge-pathnames "src/" (root-pathname)))
-
-(defun static-pathname ()
-  (merge-pathnames "static/" (root-pathname)))
 
 (defun string-empty (s)
   (or (null s)
@@ -49,4 +47,12 @@
                            :element-type '(unsigned-byte 8))))
       (read-sequence ret in)
       ret)))
+
+(defclass nil-route (routes:proxy-route) ())
+
+(defmethod routes:route-check-conditions ((route nil-route) bindings)
+  t)
+
+(defun @nil-route-require (route)
+  (make-instance 'nil-route :target route))
 
