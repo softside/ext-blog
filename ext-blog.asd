@@ -37,6 +37,8 @@
                         ((:file "post")
                          (:file "comment")
                          (:file "user")
+			 (:file "tag")
+			 (:file "posttag" :depends-on ("post" "tag"))
                          (:file "blog" :depends-on ("user" "post" "comment"))
                          (:file "store-blog" :depends-on ("blog")))
                         :depends-on ("utils" "specials"))

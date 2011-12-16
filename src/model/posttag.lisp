@@ -4,7 +4,7 @@
 ;;;;
 (in-package #:ext-blog)
 
-(export '(posttag posttag-id poattag-post-id posttag-tag-id))
+(export '(posttag posttag-id posttag-post-id posttag-tag-id))
 
 
 (defclass posttag()
@@ -16,11 +16,11 @@
 	    :accessor posttag-post-id)
    (tag-id :initform nil
 	   :initarg :tag-id
-	   :accessor posttag-tag-id)
+	   :accessor posttag-tag-id))
 
-  (:documention "A posttag object define  the post with the tag"))
+  (:documentation "A posttag object define  the post with the tag"))
 
-(devar *posttag-store-path* (merge-pathnames "posttag.store" *store-path*))
+(defvar *posttag-store-path* (merge-pathnames "posttag.store" *store-path*))
 
 (defun gen-posttag-id (posttags)
   (let ((ids (mapcar #'posttag-id posttags)))
@@ -47,7 +47,7 @@
 		     (= post-id (posttag-post-id posttag)))
 		 posttags))
 
-(defun get-post-id-by-tag (posttags tag-id)
+(defun get-post-ids-by-tag (posttags tag-id)
   (remove-if-not #'(lambda (posttag)
 		     (= tag-id (posttag-tag-id posttag)))
 		 posttags))

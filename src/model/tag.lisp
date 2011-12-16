@@ -17,9 +17,9 @@
    (description :initform nil
 		:initarg :description
 		:accessor tag-description))
-  (:documention "A tag object is a attr of post"))
+  (:documentation "A tag object is a attr of post"))
 
-(devar *tag-store-path* (merge-pathnames "tag.store" *store-path*))
+(defvar *tag-store-path* (merge-pathnames "tag.store" *store-path*))
 
 (defun gen-tag-id (tags)
   (let ((ids (mapcar #'tag-id tags)))
