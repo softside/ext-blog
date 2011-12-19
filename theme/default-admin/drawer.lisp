@@ -12,7 +12,9 @@
   (default.admin.view:newpost nil))
 
 (defmethod manage-render-content (blog (route (eql 'manage/tag/new)) args)
-  (default.admin.view:newtag  nil))
+  (default.admin.view:newtag  
+   (list :tags (get-all-tags-data blog))
+   ))
    
 
 (defmethod manage-render-content (blog (route (eql 'manage/comment)) args)

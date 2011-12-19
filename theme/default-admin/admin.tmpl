@@ -209,13 +209,8 @@ $("#menu_post").addClass('sidebarsubmenu1');
 
 {template comments}
 <form action="/manage/comment/delete" method="post" name="form_com" id="form_com">
-<h1>begin</h1>
-{foreach $tag in $tags} 
 
-{$tag.name} dfsdff
-
-{/foreach}
-<h1>end{$tags}</h1>
+<h1>end</h1>
     <table width="100%" id="adm_comment_list" class="item_list">
   	    <thead>
             <tr>
@@ -326,8 +321,9 @@ $("#menu_wt").addClass('sidebarsubmenu1');
 {template newtag}
 <script charset="utf-8" src="default-admin/editor/kindeditor.js"></script>
 <div class=containertitle><b>the tags</b><span id="msg_2"></span></div>
+these tags have been there
 {foreach $item in $tags}
-{$item}
+{$item.name}
 {/foreach}
 <div id="msg"></div>
 <form action={if $tagid}"/manage/tag/edit/{$tagid}" {else} "/manage/tag/new" {/if} method="post" /*enctype="multipart/form-data"*/ id="addlog" name="addlog">

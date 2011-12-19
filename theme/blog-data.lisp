@@ -138,6 +138,12 @@
           :email (comment-email comment)
           :url (comment-url comment))))
 
+(defun get-tag-data (tag)
+  "get a tag data"
+  (list :name (tag-name tag)
+	:id (tag-id tag))
+)
+
 (defun get-post-comments-data (blog post)
   "Get all comments data associated with the post"
   (let ((comments (get-post-comments blog post)))
@@ -151,7 +157,7 @@
   (let ((tags (blog-tags blog)))
     (if tags
 	(loop for tag in tags
-	     collect (tag-name tag))
+	     collect (get-tag-data tag))
 	nil)))
 
 (defun get-all-comments-data (blog)

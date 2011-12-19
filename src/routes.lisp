@@ -92,7 +92,7 @@
     (if (string-empty (params "name"))
 	(restas:redirect 'manage/tag/new)
 	(let ((id (create-tag *blog* (params "name"))))
-	  (restas:redirect 'manage)))
+	  (restas:redirect 'manage/tag/new)))
     (format-args :admin)))
 
 (restas:define-route manage/tag/new ("manage/tag/new")
