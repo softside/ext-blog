@@ -14,9 +14,10 @@
    (name :initform nil
 	 :initarg :name
 	 :accessor tag-name)
-   (description :initform nil
-		:initarg :description
-		:accessor tag-description))
+   (time :initform nil
+	 :initarg :time
+	 :accessor tag-create-time))
+
   (:documentation "A tag object is a attr of post"))
 
 (defvar *tag-store-path* (merge-pathnames "tag.store" *store-path*))
@@ -32,7 +33,7 @@
 (defgeneric load-tags ())
 
 (defmethod store-tags (tags)
- (let ((path *post-store-path*))
+ (let ((path *tag-store-path*))
    (ensure-directories-exist path)
    (cl-store:store tags path)))
 

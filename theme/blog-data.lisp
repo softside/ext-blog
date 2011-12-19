@@ -21,6 +21,7 @@
           get-comment-data
           get-post-comments-data
           get-all-comments-data
+	  get-all-tags-data
           get-recent-comments-brief
           get-sys-info
           get-recent-posts-brief
@@ -144,6 +145,14 @@
       (loop for comment in comments
             collect (get-comment-data blog comment))
       nil)))
+
+(defun get-all-tags-data (blog)
+  "Get all tags name"
+  (let ((tags (blog-tags blog)))
+    (if tags
+	(loop for tag in tags
+	     collect (tag-name tag))
+	nil)))
 
 (defun get-all-comments-data (blog)
   "Get all comments data"

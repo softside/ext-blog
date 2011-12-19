@@ -87,6 +87,18 @@
   (when (check-login 'manage/new 'login)
     (format-args :admin)))
 
+(restas:define-route manage/tag-done ("manage/tag/new" :method :post)
+  (when (check-login 'manage/tag/new 'login)
+    (if (string-empty (params "name"))
+	(restas:redirect 'manage/tag/new)
+	(let ((id (create-tag *blog* (params "name"))))
+	  (restas:redirect 'manage)))
+    (format-args :admin)))
+
+(restas:define-route manage/tag/new ("manage/tag/new")
+  (when (check-login 'manage/tag/new 'login)
+    (format-args :admin)))
+
 (restas:define-route manage/new-done ("manage/new" :method :post)
   (when (check-login 'manage/new 'login)
     (if (string-empty (params "title"))

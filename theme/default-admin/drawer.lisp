@@ -11,9 +11,15 @@
 (defmethod manage-render-content (blog (route (eql 'manage/new)) args)
   (default.admin.view:newpost nil))
 
+(defmethod manage-render-content (blog (route (eql 'manage/tag/new)) args)
+  (default.admin.view:newtag  nil))
+   
+
 (defmethod manage-render-content (blog (route (eql 'manage/comment)) args)
   (default.admin.view:comments 
-    (list :comments (get-all-comments-data blog))))
+    (list :comments (get-all-comments-data blog)
+	  :tags (get-all-tags-data blog))
+	  ))
 
 (defmethod manage-render-content (blog (route (eql 'manage/post)) args)
   (default.admin.view:posts
@@ -52,6 +58,9 @@
   (render-manage-page blog 'manage/comment args))
 
 (defmethod ext-blog:render-page (blog (theme (eql *theme-inst*)) (route (eql 'manage/new)) args)
+  (render-manage-page blog route args))
+
+(defmethod ext-blog:render-page (blog (theme (eql *theme-inst*)) (route (eql 'manage/tag/new)) args)
   (render-manage-page blog route args))
 
 (defmethod ext-blog:render-page (blog (theme (eql *theme-inst*)) (route (eql 'manage/post)) args)

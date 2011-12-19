@@ -11,7 +11,7 @@
                get-min-page-id
                get-max-page-id
                get-post-comments get-post-comments-cnt
-               blog-author blog-title blog-sub-title blog-comments blog-theme blog-posts))
+               blog-author blog-title blog-sub-title blog-comments blog-theme blog-posts blog-tags))
 
 (defclass blog ()
   ((user :initform nil
@@ -25,6 +25,8 @@
               :accessor blog-sub-title)
    (posts :initform nil
           :accessor blog-posts)
+   (tags :initform nil
+	 :accessor blog-tags)
    (comments :initform nil
              :accessor blog-comments)
    (admin-theme :initform nil
@@ -106,6 +108,19 @@
           (blog-posts blog)))
   (store-posts (blog-posts blog))
   id)
+(defun create-tag (blog name &key
+		   (time (get-universal-time))
+		   (id (gen-tag-id (blog-tags blog))))
+  (setf (blog-tags blog)
+	(cons
+	  (make-instance 'tag
+			 :id id
+			 :name name
+			 :time time)
+	  (blog-tags blog)))
+  (store-tags (blog-tags blog))
+  id)
+
 
 (defun edit-post (blog id title content)
   "Edit a post by its id"

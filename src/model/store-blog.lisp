@@ -36,7 +36,8 @@
   (when *blog*
     (setf (blog-user *blog*) (load-user))
     (setf (blog-posts *blog*) (load-posts))
-    (setf (blog-comments *blog*) (load-comments))))
+    (setf (blog-comments *blog*) (load-comments))
+    (setf (blog-tags *blog*) (load-tags))))
 
 (defun store-blog (&optional (blog *blog*))
   "Store a blog object."
@@ -46,5 +47,6 @@
       (cl-store:store (blog->alist blog) path)))
   (store-user (blog-user blog))
   (store-posts (blog-posts blog))
-  (store-comments (blog-comments blog)))
+  (store-comments (blog-comments blog))
+  (store-tags (blog-tags blog)))
 

@@ -100,7 +100,7 @@
                 <td class="home" align="left"><a href="/manage">ext-blog</a></td>
                 <td class="home" align="left"><a href="/index" target="_blank" title="View blog in new window">View blog</a></td>
                 <td align=right nowrap class="headtext">
-                    <a href="/manage/configure"><img src="default-admin/images/setting.gif" align="absmiddle" border="0"/>Setting</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="/manage/configure"><img src="/manage/default-admin/images/setting.gif" align="absmiddle" border="0"/>Setting</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                     <a href="/manage">Manage index</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                     <a href="/logout">Logout</a>&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
@@ -121,6 +121,7 @@
                                 <td valign="top" align="left" width="114">
                                     <div id="sidebar">
                                         <div class="sidebarsubmenu" id="menu_wt"><a href="/manage/new">New post</a></div>
+                                        <div class="sidebarsubmenu" id="menu_wg"><a href="/manage/tag/new">New tag</a></div>
                                         <div class="sidebarsubmenu" id="menu_post"><a href="/manage/post">Posts</a></div>
                                         <div class="sidebarsubmenu" id="menu_cm"><a href="/manage/comment">Comments</a> </div>
                                     </div>
@@ -208,12 +209,19 @@ $("#menu_post").addClass('sidebarsubmenu1');
 
 {template comments}
 <form action="/manage/comment/delete" method="post" name="form_com" id="form_com">
+<h1>begin</h1>
+{foreach $tag in $tags} 
+
+{$tag.name} dfsdff
+
+{/foreach}
+<h1>end{$tags}</h1>
     <table width="100%" id="adm_comment_list" class="item_list">
   	    <thead>
             <tr>
                 <th width="19"><input onclick="CheckAll(this.form)" type="checkbox" value="on" name="chkall" /></th>
-                <th width="350"><b>Content</b></th>
-		        <th width="300"><b>Author</b></th>
+                <th width="350"><b>Content12121122</b></th>
+		        <th width="300"><b>Author121</b></th>
                 <th width="250"><b>Post</b></th>
             </tr>
         </thead>
@@ -314,6 +322,43 @@ $("#menu_wt").addClass('sidebarsubmenu1');
 </script>
 {/template}
 
+
+{template newtag}
+<script charset="utf-8" src="default-admin/editor/kindeditor.js"></script>
+<div class=containertitle><b>the tags</b><span id="msg_2"></span></div>
+{foreach $item in $tags}
+{$item}
+{/foreach}
+<div id="msg"></div>
+<form action={if $tagid}"/manage/tag/edit/{$tagid}" {else} "/manage/tag/new" {/if} method="post" /*enctype="multipart/form-data"*/ id="addlog" name="addlog">
+    <table cellspacing="1" cellpadding="4" width="720" border="0">
+        <tbody>
+            <tr nowrap="nowrap">
+                <td>
+                    <b>tag:</b><br/>
+                    <input type="text" maxlength="200" style="width:380px;" name="name" id="title" value="{$name}"/>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table cellspacing="1" cellpadding="4" width="720" border="0">
+        <tr>
+            <td align="center"><br>
+                <input type="submit" value="Post" onclick="return ext_checkform();" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>
+<div class=line></div>
+<script>
+{literal}
+$("#title").focus();
+$("#menu_wg").addClass('sidebarsubmenu1');
+{/literal}
+</script>
+{/template}
+
 {template editpost}
     {call newpost data="all" /}
 {/template}
@@ -385,10 +430,10 @@ $("#menu_wt").addClass('sidebarsubmenu1');
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link href="default-admin/style/default/style.css" type="text/css" rel="stylesheet" />
-        <script type="text/javascript" src="default-admin/js/jquery-1.2.6.js"></script>
-        <script type="text/javascript" src="default-admin/js/common.js"></script>
-        <link href="default-admin/css/css-main.css" type="text/css" rel="stylesheet" />
+        <link href="/manage/default-admin/style/default/style.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="/manage/default-admin/js/jquery-1.2.6.js"></script>
+        <script type="text/javascript" src="/manage/default-admin/js/common.js"></script>
+        <link href="/manage/default-admin/css/css-main.css" type="text/css" rel="stylesheet" />
         <title>Manage center</title>
     </head>
     <body>
